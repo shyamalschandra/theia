@@ -1163,6 +1163,13 @@ export interface WorkspaceEditDto {
     rejectReason?: string;
 }
 
+export interface AuthenticationExt {
+}
+
+export interface AuthenticationMain {
+    $registerAuthenticationProvider(id: string, displayName: string, supportsMultipleAccounts: boolean): void;
+}
+
 export interface LanguagesContributionExt {
     $start(languageServerInfo: theia.LanguageServerInfo): void;
 }
@@ -1412,6 +1419,7 @@ export interface ClipboardMain {
 }
 
 export const PLUGIN_RPC_CONTEXT = {
+    AUTHENTICATION_MAIN: <ProxyIdentifier<AuthenticationMain>>createProxyIdentifier<AuthenticationMain>('AuthenticationMain'),
     COMMAND_REGISTRY_MAIN: <ProxyIdentifier<CommandRegistryMain>>createProxyIdentifier<CommandRegistryMain>('CommandRegistryMain'),
     QUICK_OPEN_MAIN: createProxyIdentifier<QuickOpenMain>('QuickOpenMain'),
     DIALOGS_MAIN: createProxyIdentifier<DialogsMain>('DialogsMain'),
@@ -1441,6 +1449,7 @@ export const PLUGIN_RPC_CONTEXT = {
 };
 
 export const MAIN_RPC_CONTEXT = {
+    AUTHENTICATION_EXT: createProxyIdentifier<AuthenticationExt>('AuthenticationExt'),
     HOSTED_PLUGIN_MANAGER_EXT: createProxyIdentifier<PluginManagerExt>('PluginManagerExt'),
     COMMAND_REGISTRY_EXT: createProxyIdentifier<CommandRegistryExt>('CommandRegistryExt'),
     QUICK_OPEN_EXT: createProxyIdentifier<QuickOpenExt>('QuickOpenExt'),
